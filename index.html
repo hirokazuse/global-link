@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Global Link — Community Commerce Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=Noto+Sans+Thai:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0d1117;
+      --ink-mid: #1c2333;
+      --ink-light: #2d3748;
+      --silver: #8892a4;
+      --silver-light: #b0bac8;
+      --white: #f8fafc;
+      --accent: #4ade80;
+      --accent-dim: rgba(74, 222, 128, 0.15);
+      --accent-glow: rgba(74, 222, 128, 0.06);
+      --gold: #f0c060;
+      --gold-dim: rgba(240, 192, 96, 0.12);
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(74, 222, 128, 0.3);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--ink);
+      color: var(--white);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      font-weight: 300;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--silver);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8rem 4rem 6rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* グリッド背景 */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    /* グロー */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 20%; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 400px;
+      background: radial-gradient(ellipse, rgba(74,222,128,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      animation: fadeUp 1s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(74,222,128,0.2);
+      border-radius: 30px;
+      background: var(--accent-glow);
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 9vw, 7.5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.0;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      color: var(--silver);
+      max-width: 50ch;
+      margin: 1.5rem auto 3rem;
+      font-weight: 300;
+      line-height: 1.8;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: var(--accent);
+      color: var(--ink);
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: #86efac;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(74,222,128,0.25);
+    }
+
+    .btn-ghost {
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: var(--silver-light);
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      transition: all 0.25s;
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--border-hover);
+      color: var(--white);
+    }
+
+    /* ===== SERVICES ===== */
+    #services {
+      padding: 7rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: block;
+      font-weight: 500;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: var(--white);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-body {
+      color: var(--silver);
+      font-size: 0.95rem;
+      max-width: 55ch;
+      margin-bottom: 3.5rem;
+      font-weight: 300;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--ink-mid);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: block;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+
+    .service-card:hover::before { opacity: 1; }
+
+    .service-status {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .status-live {
+      background: var(--accent-dim);
+      color: var(--accent);
+      border: 1px solid rgba(74,222,128,0.2);
+    }
+
+    .status-soon {
+      background: var(--gold-dim);
+      color: var(--gold);
+      border: 1px solid rgba(240,192,96,0.2);
+    }
+
+    .status-future {
+      background: rgba(255,255,255,0.04);
+      color: var(--silver);
+      border: 1px solid var(--border);
+    }
+
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .service-location {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--silver);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .service-arrow {
+      position: absolute;
+      bottom: 2rem; right: 2rem;
+      font-size: 1.2rem;
+      color: var(--silver);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: all 0.3s;
+    }
+
+    .service-card:hover .service-arrow {
+      opacity: 1;
+      transform: translateX(0);
+      color: var(--accent);
+    }
+
+    /* ===== STRUCTURE ===== */
+    #structure {
+      padding: 7rem 4rem;
+      background: var(--ink-mid);
+    }
+
+    #structure .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .structure-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .structure-diagram {
+      font-family: 'Outfit', monospace;
+      font-size: 0.82rem;
+      color: var(--silver);
+      line-height: 2;
+      background: var(--ink);
+      padding: 2.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .structure-diagram .hl { color: var(--accent); font-weight: 500; }
+    .structure-diagram .hl-gold { color: var(--gold); }
+    .structure-diagram .dim { color: var(--silver); opacity: 0.45; }
+
+    .structure-points {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .structure-point {
+      padding: 1.5rem;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+    }
+
+    .structure-point h4 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .structure-point p {
+      font-size: 0.82rem;
+      color: var(--silver);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ===== VISION ===== */
+    #vision {
+      padding: 7rem 4rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .vision-communities {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin: 3rem 0;
+    }
+
+    .community-node {
+      padding: 1.2rem 2rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      background: var(--ink-mid);
+      min-width: 180px;
+      transition: all 0.3s;
+    }
+
+    .community-node.active {
+      border-color: rgba(74,222,128,0.3);
+      background: var(--accent-dim);
+    }
+
+    .community-node.active:hover {
+      box-shadow: 0 0 24px rgba(74,222,128,0.1);
+    }
+
+    .community-node.future {
+      opacity: 0.4;
+      border-style: dashed;
+    }
+
+    .community-flag { font-size: 1.5rem; margin-bottom: 0.4rem; display: block; }
+
+    .community-name {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .community-status {
+      font-size: 0.7rem;
+      color: var(--silver);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 3rem 4rem;
+      text-align: center;
+      color: var(--silver);
+      font-size: 0.82rem;
+    }
+
+    footer .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--white);
+      display: block;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.06em;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #services, #vision { padding: 5rem 1.5rem; }
+      #structure { padding: 5rem 1.5rem; }
+      .structure-grid { grid-template-columns: 1fr; gap: 2rem; }
+      footer { padding: 2.5rem 1.5rem; }
+      .hero { padding: 7rem 1.5rem 4rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Global <em>Link</em></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#vision">Vision</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Community Commerce Platform</div>
+    <h1>Global <em>Link</em></h1>
+    <p class="hero-sub">
+      Connecting overseas communities with the products they love.<br>
+      A community-driven collective purchasing platform.
+    </p>
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary">View Services</a>
+      <a href="#vision" class="btn-ghost">Our Vision</a>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <span class="section-eyebrow">Services</span>
+  <h2 class="section-title">Our Platforms</h2>
+  <p class="section-body">Each service is a dedicated community purchasing platform, built for a specific audience and product category.</p>
+
+  <div class="services-grid">
+
+    <!-- Suan Khrob Khrua -->
+    <a href="https://hirokazuse.github.io/suan-khrob-khrua/" target="_blank" class="service-card">
+      <span class="service-status status-live">● Live</span>
+      <span class="service-icon">🌿</span>
+      <h3>Suan Khrob Khrua</h3>
+      <div class="service-location">Japan · Thai Community</div>
+      <p>สวนครอบครัว — Collective purchasing of Thai fruits, vegetables, and herbs for the Thai community in Japan.</p>
+      <span class="service-arrow">→</span>
+    </a>
+
+    <!-- Thai Pants Shop -->
+    <div class="service-card">
+      <span class="service-status status-soon">◐ Coming Soon</span>
+      <span class="service-icon">👘</span>
+      <h3>Thai Pants Shop</h3>
+      <div class="service-location">Japan · Thai Goods</div>
+      <p>Thai fashion and lifestyle goods. Authentic Thai clothing delivered directly to customers in Japan.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <!-- Partner Services -->
+    <div class="service-card">
+      <span class="service-status status-future">○ Open to Partners</span>
+      <span class="service-icon">🤝</span>
+      <h3>Partner Services</h3>
+      <div class="service-location">Global · Any Community</div>
+      <p>Have a community and a product? List your service on Global Link and reach your audience through our platform.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+    <!-- Community Projects -->
+    <div class="service-card">
+      <span class="service-status status-future">○ Future</span>
+      <span class="service-icon">🌐</span>
+      <h3>Community Projects</h3>
+      <div class="service-location">Global · Expanding</div>
+      <p>Vietnamese, Filipino, and other overseas communities. The platform grows with demand.</p>
+      <span class="service-arrow">→</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section id="structure">
+  <div class="inner">
+    <span class="section-eyebrow">How It Works</span>
+    <h2 class="section-title">3-Layer Structure</h2>
+    <p class="section-body">A clean hierarchy that scales from a single event to a global marketplace.</p>
+
+    <div class="structure-grid">
+      <div class="structure-diagram">
+        <div><span class="hl">Global Link</span></div>
+        <div>&nbsp;&nbsp;Platform / Company</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;&nbsp;↓</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;&nbsp;<span class="hl-gold">Services</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;Suan Khrob Khrua</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;Thai Pants Shop</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;Partner Services</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;&nbsp;↓</div>
+        <div>&nbsp;</div>
+        <div>&nbsp;&nbsp;<span class="dim">Events / Campaigns</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">March Mango 2025</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">May Durian 2025</span></div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">Summer Collection...</span></div>
+      </div>
+
+      <div class="structure-points">
+        <div class="structure-point">
+          <h4>Platform Layer</h4>
+          <p>Global Link owns the brand, infrastructure, and business model. This is the foundation everything else is built on.</p>
+        </div>
+        <div class="structure-point">
+          <h4>Service Layer</h4>
+          <p>Each service targets a specific community and product category. New services can be added without changing the platform.</p>
+        </div>
+        <div class="structure-point">
+          <h4>Event Layer</h4>
+          <p>Individual campaigns run within each service. Order → Collect → Import → Deliver. No inventory risk.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISION -->
+<section id="vision">
+  <span class="section-eyebrow">Vision</span>
+  <h2 class="section-title">Every Community.<br>Every Product.</h2>
+  <p class="section-body" style="margin:1rem auto 0;">Starting with the Thai community in Japan. Expanding to every overseas community that wants access to products from home.</p>
+
+  <div class="vision-communities">
+    <div class="community-node active">
+      <span class="community-flag">🇹🇭</span>
+      <div class="community-name">Thai Community</div>
+      <div class="community-status">Japan · Active</div>
+    </div>
+    <div class="community-node future">
+      <span class="community-flag">🇻🇳</span>
+      <div class="community-name">Vietnamese</div>
+      <div class="community-status">Future</div>
+    </div>
+    <div class="community-node future">
+      <span class="community-flag">🇵🇭</span>
+      <div class="community-name">Filipino</div>
+      <div class="community-status">Future</div>
+    </div>
+    <div class="community-node future">
+      <span class="community-flag">🌐</span>
+      <div class="community-name">& More</div>
+      <div class="community-status">Open</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">Global Link</span>
+  <p>Community Commerce Platform</p>
+  <p style="margin-top:0.8rem;">
+    <a href="https://hirokazuse.github.io/suan-khrob-khrua/">Suan Khrob Khrua</a>
+  </p>
+  <p style="margin-top:1.5rem; opacity:0.35;">© 2025 Global Link. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
